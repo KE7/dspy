@@ -34,6 +34,7 @@ setup(
         "google-vertex-ai": ["google-cloud-aiplatform==1.43.0"],
         "snowflake": ["snowflake-snowpark-python"],
         "fastembed": ["fastembed"],
+        "bingsearch": ["beautifulsoup4"],
     },	
     classifiers=[	
         "Development Status :: 3 - Alpha",	

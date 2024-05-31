@@ -1,3 +1,8 @@
+"""
+Retriever model for Bing Search Engine
+Author: Karim Elmaaroufi & Shangyin Tan
+"""
+
 from enum import Enum
 from typing import List, Optional, Union
 
@@ -85,7 +90,15 @@ class BingSearch(dspy.Retrieve):
                 for i in range(k)
             ]
 
-            pages = [requests.get(url).text for url in urls] 
+            pages = [requests.get(url).text for url in urls]
+            try:
+                from bs4 import BeautifulSoup
+                pages = [BeautifulSoup(page, "html.parser").get_text() for page in pages]
+            except ImportError:
+                raise ImportError(
+                    "The 'beautifulsoup4' extra is required to use BingSearchRM with the 'webpage' result choice. Install it with `pip install dspy-ai[bingsearch]`",
+                )
+            
             # TODO: this is just raw html, need to do something better with it
 
             return pages
